@@ -20,3 +20,4 @@ def init_ops():
     if ops == '=':
         view.print_total()
         return True
+

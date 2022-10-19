@@ -13,26 +13,30 @@ def input_integer(enter):
 
 def input_operation(enter):
     while True:
-        a = input(enter)
-        if a in ['+', '-', '*', '/', '=']:
+        expr = input(enter)
+        if expr:
             return a
         else:
             view.error_value()
 
 def operation():
-    match (model.ops):
-        case '+':
+    while True:
+        if model.ops == '+':
             model.total = model.first + model.second
-        case '-':
+            break
+        elif model.ops == '-':
             model.total = model.first - model.second
-        case '*':
+            break
+        elif model.ops == '*':
             model.total = model.first * model.second
-        case '/':
+            break
+        elif model.ops ==  '//':
             while model.second == 0:
                 print('На ноль делить нельзя!')
                 model.init_second()
-            model.total = int(model.first / model.second)
-
-        case _:
+            model.total = model.first // model.second
+            break
+        else:
             view.error_value()
-    logger.logger(f'{model.first} {model.ops} {model.second} = {model.total}')
+            break
+    logger.logger(f'{model.first} {model.ops} {model.second} = {model.total}') 
