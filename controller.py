@@ -11,7 +11,6 @@ def input_integer(enter):
         except:
             view.error_value()
 
-
 def input_operation(enter):
     while True:
         a = input(enter)
