@@ -1,7 +1,6 @@
-import logger
-import model
 import view
-
+import model
+import expression
 
 def input_integer(enter):
     while True:
@@ -15,28 +14,22 @@ def input_operation(enter):
     while True:
         expr = input(enter)
         if expr:
-            return a
+            return expr
         else:
             view.error_value()
 
-def operation():
+def start_calc():
     while True:
-        if model.ops == '+':
-            model.total = model.first + model.second
+        view.print_menu()
+        mode = input("выберите действие: ")
+        if mode == "1":
+            expression.start_expr_calc()
             break
-        elif model.ops == '-':
-            model.total = model.first - model.second
+        elif mode == "2":
+            model.init_calc()
             break
-        elif model.ops == '*':
-            model.total = model.first * model.second
+        elif mode == "0":
             break
-        elif model.ops ==  '//':
-            while model.second == 0:
-                print('На ноль делить нельзя!')
-                model.init_second()
-            model.total = model.first // model.second
-            break
-        else:
+        else: 
             view.error_value()
-            break
-    logger.logger(f'{model.first} {model.ops} {model.second} = {model.total}') 
+       
