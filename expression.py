@@ -42,29 +42,24 @@ def extract_simple():
 
 def calculate_simple(expr_simple: list):
     while "*" in expr_simple or "/" in expr_simple:
-        print(expr_simple)
-        for j in range(len(expr_simple)):
-            if expr_simple[j] == '*' or expr_simple[j] == '/':
-                model.first = int(expr_simple[j - 1])
-                model.second = int(expr_simple[j + 1])
-                model.ops = expr_simple[j]
-                model.operation()
-                expr_simple[j - 1] = str(model.total)
-                expr_simple.pop(j)
-                expr_simple.pop(j)
-                break
+        ops_local = ["*","/"]
+        single_operation(expr_simple, ops_local)
     while "+" in expr_simple or "-" in expr_simple:
-        for k in range(len(expr_simple)):
-            if expr_simple[k] == "+" or expr_simple[k] == "-":
-                model.first = int(expr_simple[k - 1])
-                model.second = int(expr_simple[k + 1])
-                model.ops = expr_simple[k]
-                model.operation()
-                expr_simple[k - 1] = str(model.total)
-                expr_simple.pop(k)
-                expr_simple.pop(k)
-                break
+        ops_local = ["+","-"]
+        single_operation(expr_simple, ops_local)
 
+def single_operation(expr_simple, ops_local):
+    for i in range(len(expr_simple)):
+        if expr_simple[i] in ops_local:
+            model.first = int(expr_simple[i - 1])
+            model.second = int(expr_simple[i + 1])
+            model.ops = expr_simple[i]
+            model.operation()
+            expr_simple[i - 1] = str(model.total)
+            expr_simple.pop(i)
+            expr_simple.pop(i)
+            break
+        
 def calculate():
     global expr_norm
     normalise_expression()
