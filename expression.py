@@ -41,7 +41,8 @@ def extract_simple():
             calculate_simple(expr_norm)
 
 def calculate_simple(expr_simple: list):
-    while len(expr_simple) > 1:
+    while "*" in expr_simple or "/" in expr_simple:
+        print(expr_simple)
         for j in range(len(expr_simple)):
             if expr_simple[j] == '*' or expr_simple[j] == '/':
                 model.first = int(expr_simple[j - 1])
@@ -52,6 +53,7 @@ def calculate_simple(expr_simple: list):
                 expr_simple.pop(j)
                 expr_simple.pop(j)
                 break
+    while "+" in expr_simple or "-" in expr_simple:
         for k in range(len(expr_simple)):
             if expr_simple[k] == "+" or expr_simple[k] == "-":
                 model.first = int(expr_simple[k - 1])
