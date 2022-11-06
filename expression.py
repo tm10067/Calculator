@@ -25,6 +25,7 @@ def normalise_expression():
 def extract_simple():
     global expr_norm
     while len(expr_norm) > 1:
+        print(expr, expr_norm)
         if "(" in expr_norm and ")" in expr_norm:
             start_pos = 0
             end_pos = 0
@@ -37,6 +38,10 @@ def extract_simple():
                     calculate_simple(expr_simple)
                     expr_norm = expr_norm[0 : start_pos - 1] + [str(model.total)] + expr_norm[end_pos + 1 : len(expr_norm)] 
                     break
+        elif "(" in expr_norm and not ")" in expr_norm:
+            expr_norm.remove("(")
+        elif ")" in expr_norm and not "(" in expr_norm:
+            expr_norm.remove(")")
         else:
             calculate_simple(expr_norm)
 
@@ -48,7 +53,7 @@ def calculate_simple(expr_simple: list):
         ops_local = ["+","-"]
         single_operation(expr_simple, ops_local)
 
-def single_operation(expr_simple, ops_local):
+def single_operation(expr_simple: list, ops_local):
     for i in range(len(expr_simple)):
         if expr_simple[i] in ops_local:
             model.first = int(expr_simple[i - 1])
@@ -59,7 +64,7 @@ def single_operation(expr_simple, ops_local):
             expr_simple.pop(i)
             expr_simple.pop(i)
             break
-        
+
 def calculate():
     global expr_norm
     normalise_expression()
